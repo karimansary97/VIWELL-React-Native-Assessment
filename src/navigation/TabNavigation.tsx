@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import BottomBar from "../components/UIElements/BottomBar";
 import routes from "./routes";
-import Home from "../screens/Home";
+import Products from "../screens/Products";
 
 const tabBarRender = (props: any) => {
   return <BottomBar {...props} />;
@@ -19,8 +19,8 @@ const TabNavigation = () => {
         headerShown: false,
       }}
     >
-      <Tab.Screen name={routes.products} component={Home} />
-      <Tab.Screen name={routes.wishlist} component={Home} />
+      <Tab.Screen name={routes.products} component={Products} />
+      <Tab.Screen name={routes.wishlist} component={Products} />
     </Tab.Navigator>
   );
 };
