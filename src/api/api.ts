@@ -1,27 +1,32 @@
-// Import the RTK Query methods from the React-specific entry point
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import ProductsType, { product } from "../types/ProductsType.type";
 
-// Use the `Post` type we've already defined in `postsSlice`,
-// and then re-export it for ease of use
-
-// Define our single API slice object
-export const apiSlice = createApi({
-  // The cache reducer expects to be added at `state.api` (already default - this is optional)
-  reducerPath: "api",
-  // All of our requests will have URLs starting with '/fakeApi'
+export const products = createApi({
+  reducerPath: "apiProducts",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.EXPO_PUBLIC_API_URL }),
-
-  // The "endpoints" represent operations and requests for this server
+  keepUnusedDataFor: 30,
+  tagTypes: ["products"],
   endpoints: (builder) => ({
-    // The `getPosts` endpoint is a "query" operation that returns data.
-    // The return value is a `Post[]` array, and it takes no arguments.
-
-    getPosts: builder.query<any[], void>({
-      // The URL for the request is '/fakeApi/posts'
-      query: () => "/products",
+    getProducts: builder.query<product[], { skip: number; limit?: number }>({
+      query: ({ limit = 10, skip = 0 }) =>
+        `/products?limit=${limit}&skip=${skip}&select=id,thumbnail,title,price`,
+      serializeQueryArgs: ({ endpointName }) => endpointName,
+      transformResponse: (data: ProductsType) => data?.products,
+      merge: (currentDataCache, newData, { arg: { skip } }) => {
+        if (skip === 0) {
+          return newData;
+        }
+        return [...currentDataCache, ...newData];
+      },
+      providesTags: (result = []) =>
+        result
+          ? result.map(({ id }) => ({ type: "products", id }))
+          : ["products"],
+      forceRefetch: ({ currentArg, previousArg }) => {
+        return currentArg !== previousArg;
+      },
     }),
   }),
 });
 
-// Export the auto-generated hook for the `getPosts` query endpoint
-export const { useGetPostsQuery } = apiSlice;
+export const { useGetProductsQuery } = products;
