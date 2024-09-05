@@ -1,9 +1,11 @@
 import React, { FC } from "react";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import unit from "../../../styles/unit";
 import Text from "../Text";
 import useRoute from "../../../hooks/useRoute";
 import useNavigation from "../../../hooks/useNavigation";
+import colors from "../../../styles/colors";
+import AngleLeftIcon from "../../../../assets/AngleLeftIcon";
 
 type HeaderProps = {};
 
@@ -14,7 +16,14 @@ const Header: FC<HeaderProps> = () => {
 
   return (
     <View style={styles.container}>
-      <Text size="xxlarge" color="white">
+      <Pressable onPress={goBack}>
+        <AngleLeftIcon
+          width={24 * unit}
+          height={24 * unit}
+          color={colors.primary}
+        />
+      </Pressable>
+      <Text semiBold size="xxlarge">
         {customeName || name}
       </Text>
     </View>

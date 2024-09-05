@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { FlatList, StyleSheet, RefreshControl } from "react-native";
 import Layout from "../../components/UIElements/Layout";
-import { useGetProductsQuery } from "../../redux/services/products";
+import { useGetProductsQuery } from "../../redux/queries/products";
 import LoadingScreen from "../../components/UIElements/LoadingScreen/LoadingScreen";
 import ListFooterLoading from "../../components/UIElements/ListFooterLoading/ListFooterLoading";
 import EmptyView from "../../components/UIElements/EmptyView";
@@ -44,14 +44,7 @@ const Products: FC<HomeProps> = (props) => {
           data={data}
           testID="product-list"
           keyExtractor={(item) => item?.id + ""}
-          renderItem={({ item }) => (
-            <ProductItem
-              image={item?.thumbnail}
-              title={item?.title}
-              price={item?.price}
-              id={item?.id}
-            />
-          )}
+          renderItem={({ item }) => <ProductItem item={item} />}
           onEndReached={onEndReached}
           showsVerticalScrollIndicator={false}
           refreshControl={

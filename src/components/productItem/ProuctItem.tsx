@@ -1,37 +1,66 @@
 import React, { FC } from "react";
-import { Image, Pressable, StyleSheet, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import Text from "../UIElements/Text";
 import colors from "../../styles/colors";
 import unit from "../../styles/unit";
+import useNavigation from "../../hooks/useNavigation";
+import routes from "../../navigation/routes";
+import { CURRENCY } from "../../helpers/common";
+import HeartIcon from "../../../assets/HearIcon";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import useIsWishlisted from "../../hooks/useIsWishlisted";
+import { addProduct, removeProduct } from "../../redux/slices/wishlistSlice";
+import { product } from "../../types/ProductsType.type";
 
 type ProuctItemProps = {
-  title: string;
-  image: string;
-  price: number;
-  id: number;
+  item: product;
 };
 
-const ProuctItem: FC<ProuctItemProps> = ({ title, image, price, id }) => {
-  const handleOnPress = () => {};
+const ProuctItem: FC<ProuctItemProps> = ({ item }) => {
+  const { navigate } = useNavigation();
 
+  const dispatch = useAppDispatch();
+  const isWishlisted = useIsWishlisted(item?.id);
+
+  const handleWishlistPress = () => {
+    dispatch(isWishlisted ? removeProduct(item?.id) : addProduct(item));
+  };
+
+  const handleOnPress = () => {
+    navigate(routes.productDetails, item?.id);
+  };
   return (
     <Pressable style={styles.continer} onPress={handleOnPress}>
       <Image
         style={styles.itemImage}
-        source={{ uri: image }}
+        source={{ uri: item?.thumbnail }}
         resizeMode="contain"
         progressiveRenderingEnabled
         fadeDuration={600}
       />
       <View style={styles.continerDetails}>
         <Text semiBold size="normal">
-          {title}
+          {item?.title}
         </Text>
-        <View>
+        <View style={styles.price}>
           <Text bold size="normal">
-            {price} $
+            {item?.price} {CURRENCY}
           </Text>
+          <Pressable style={styles.button} onPress={handleWishlistPress}>
+            <HeartIcon
+              width={20 * unit}
+              height={20 * unit}
+              color={colors.white}
+              fill={isWishlisted ? colors.white : undefined}
+            />
+          </Pressable>
         </View>
       </View>
     </Pressable>
@@ -58,6 +87,19 @@ const styles = StyleSheet.create({
     borderRadius: 8 * unit,
     borderWidth: 0.2 * unit,
     backgroundColor: colors.lightSmoke,
+  },
+  price: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  button: {
+    width: 40 * unit,
+    height: 40 * unit,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 20 * unit,
+    backgroundColor: colors.primary,
   },
 });
 

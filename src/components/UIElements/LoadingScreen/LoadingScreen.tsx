@@ -8,9 +8,11 @@ type LoadingScreenProps = {} & LayoutProps;
 
 const LoadingScreen: FC<LoadingScreenProps> = ({ ...props }) => {
   return (
-    <Layout style={styles.container} testId="loading-screen" {...props}>
-      <ActivityIndicator size={"large"} />
-      <Text size="large">Laoding</Text>
+    <Layout testId="loading-screen" {...props}>
+      <View style={styles.container}>
+        <ActivityIndicator size={"large"} />
+        <Text size="large">Laoding</Text>
+      </View>
     </Layout>
   );
 };
