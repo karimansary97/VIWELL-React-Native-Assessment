@@ -25,7 +25,7 @@ type ProductDetailsProps = {};
 
 const ProductDetails: FC<ProductDetailsProps> = (props) => {
   const { params: productId } = useRoute();
-  const { data, isFetching, refetch } = useGetProductQuery(productId);
+  const { data, isFetching, refetch, isError } = useGetProductQuery(productId);
   const dispatch = useAppDispatch();
 
   const isWishlisted = useIsWishlisted(data?.id);
@@ -82,7 +82,7 @@ const ProductDetails: FC<ProductDetailsProps> = (props) => {
           onPress={handleWishListPress}
         >
           <Text testID="wishlist-button-text" semiBold color="white">
-            Add To WishList
+            {!isWishlisted ? "Add To WishList" : "Remove from WishList"}
           </Text>
           <HeartIcon
             width={20 * unit}

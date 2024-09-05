@@ -21,9 +21,10 @@ import { product } from "../../types/ProductsType.type";
 
 type ProuctItemProps = {
   item: product;
+  index: number;
 };
 
-const ProuctItem: FC<ProuctItemProps> = ({ item }) => {
+const ProuctItem: FC<ProuctItemProps> = ({ item, index }) => {
   const { navigate } = useNavigation();
 
   const dispatch = useAppDispatch();
@@ -53,7 +54,11 @@ const ProuctItem: FC<ProuctItemProps> = ({ item }) => {
           <Text bold size="normal">
             {item?.price} {CURRENCY}
           </Text>
-          <Pressable style={styles.button} onPress={handleWishlistPress}>
+          <Pressable
+            style={styles.button}
+            onPress={handleWishlistPress}
+            testID={`Fav-button-${index}`}
+          >
             <HeartIcon
               width={20 * unit}
               height={20 * unit}
