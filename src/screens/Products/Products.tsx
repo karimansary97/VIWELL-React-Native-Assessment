@@ -44,7 +44,9 @@ const Products: FC<HomeProps> = (props) => {
           data={data}
           testID="product-list"
           keyExtractor={(item) => item?.id + ""}
-          renderItem={({ item }) => <ProductItem item={item} />}
+          renderItem={({ item, index }) => (
+            <ProductItem item={item} index={index} />
+          )}
           onEndReached={onEndReached}
           showsVerticalScrollIndicator={false}
           refreshControl={
