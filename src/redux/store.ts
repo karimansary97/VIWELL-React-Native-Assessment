@@ -1,16 +1,44 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { products } from "./services/products";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { products } from "./queries/products";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import wishlistSlice from "./slices/wishlistSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+  persistReducer,
+  persistStore,
+} from "redux-persist";
+
+const reducer = combineReducers({
+  wishlist: wishlistSlice.reducer,
+  [products.reducerPath]: products.reducer,
+});
+
+const persistConfig = {
+  key: "root",
+  storage: AsyncStorage,
+};
+
+const persistedReducer = persistReducer(persistConfig, reducer);
 
 export const store = configureStore({
-  reducer: {
-    [products.reducerPath]: products.reducer,
-  },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(products.middleware),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(products.middleware),
 });
 
 setupListeners(store.dispatch);
+
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

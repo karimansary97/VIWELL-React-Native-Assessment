@@ -26,7 +26,11 @@ export const products = createApi({
         return currentArg !== previousArg;
       },
     }),
+    getProduct: builder.query<product, number>({
+      query: (id) =>
+        `/products/${id}?select=id,thumbnail,title,price,brand,description,rating,category`,
+    }),
   }),
 });
 
-export const { useGetProductsQuery } = products;
+export const { useGetProductsQuery, useGetProductQuery } = products;

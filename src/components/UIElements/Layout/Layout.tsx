@@ -35,6 +35,7 @@ const Layout: FC<LayoutProps> = ({
       />
       <View style={[styles.content, style]}>
         {HeaderVisablity && <Header />}
+
         {children}
       </View>
     </KeyboardAvoidingView>
