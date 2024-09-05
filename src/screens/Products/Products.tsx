@@ -1,7 +1,7 @@
 import React, { FC, useState } from "react";
 import { FlatList, StyleSheet, RefreshControl } from "react-native";
 import Layout from "../../components/UIElements/Layout";
-import { useGetProductsQuery } from "../../api/api";
+import { useGetProductsQuery } from "../../redux/services/products";
 import LoadingScreen from "../../components/UIElements/LoadingScreen/LoadingScreen";
 import ListFooterLoading from "../../components/UIElements/ListFooterLoading/ListFooterLoading";
 import EmptyView from "../../components/UIElements/EmptyView";
@@ -10,7 +10,7 @@ import ProductItem from "../../components/productItem";
 
 type HomeProps = {};
 
-const Home: FC<HomeProps> = (props) => {
+const Products: FC<HomeProps> = (props) => {
   const [skip, setSkip] = useState(0);
   const {
     data = [],
@@ -42,6 +42,7 @@ const Home: FC<HomeProps> = (props) => {
         <FlatList
           contentContainerStyle={styles.list}
           data={data}
+          testID="product-list"
           keyExtractor={(item) => item?.id + ""}
           renderItem={({ item }) => (
             <ProductItem
@@ -54,7 +55,11 @@ const Home: FC<HomeProps> = (props) => {
           onEndReached={onEndReached}
           showsVerticalScrollIndicator={false}
           refreshControl={
-            <RefreshControl refreshing={false} onRefresh={onRefresh} />
+            <RefreshControl
+              testID="refresh-control"
+              refreshing={false}
+              onRefresh={onRefresh}
+            />
           }
           ListFooterComponent={() => (
             <ListFooterLoading hasLoading={isFetching && !isLoading} />
@@ -74,4 +79,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default Products;

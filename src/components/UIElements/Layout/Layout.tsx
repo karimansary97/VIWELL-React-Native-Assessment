@@ -9,15 +9,17 @@ import { IS_IOS } from "../../../helpers/common";
 
 const behavior = IS_IOS ? "padding" : "height";
 
-type LayoutProps = {
+export type LayoutProps = {
   HeaderVisablity?: boolean;
   children?: ReactNode;
   style?: ViewStyle;
+  testId?: string;
 };
 
 const Layout: FC<LayoutProps> = ({
   HeaderVisablity = false,
   style,
+  testId,
   children,
 }) => {
   const { top } = useSafeAreaInsets();
@@ -25,6 +27,7 @@ const Layout: FC<LayoutProps> = ({
     <KeyboardAvoidingView
       behavior={behavior}
       style={[styles.wrapper, { paddingTop: top }]}
+      testID={testId}
     >
       <StatusBar
         backgroundColor={colors.defaultBackGround}

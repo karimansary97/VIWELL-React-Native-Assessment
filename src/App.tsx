@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { StyleSheet } from "react-native";
 import MainNavigation from "./navigation/MainNavgation";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
@@ -16,11 +15,5 @@ const App: FC<AppProps> = (props) => {
     </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
