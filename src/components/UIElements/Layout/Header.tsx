@@ -5,7 +5,7 @@ import Text from "../Text";
 import useRoute from "../../../hooks/useRoute";
 import useNavigation from "../../../hooks/useNavigation";
 import colors from "../../../styles/colors";
-import AngleLeftIcon from "../../../../assets/AngleLeftIcon";
+import AngleLeftIcon from "../../../../assets/svg/AngleLeftIcon";
 
 type HeaderProps = {};
 

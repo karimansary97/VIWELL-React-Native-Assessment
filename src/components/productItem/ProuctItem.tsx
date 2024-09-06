@@ -13,7 +13,7 @@ import unit from "../../styles/unit";
 import useNavigation from "../../hooks/useNavigation";
 import routes from "../../navigation/routes";
 import { CURRENCY } from "../../helpers/common";
-import HeartIcon from "../../../assets/HearIcon";
+import HeartIcon from "../../../assets/svg/HearIcon";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import useIsWishlisted from "../../hooks/useIsWishlisted";
 import { addProduct, removeProduct } from "../../redux/slices/wishlistSlice";

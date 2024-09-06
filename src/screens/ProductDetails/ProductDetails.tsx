@@ -16,7 +16,7 @@ import colors from "../../styles/colors";
 import Text from "../../components/UIElements/Text";
 import Rate from "../../components/UIElements/Rate";
 import { CURRENCY } from "../../helpers/common";
-import HeartIcon from "../../../assets/HearIcon";
+import HeartIcon from "../../../assets/svg/HearIcon";
 import useIsWishlisted from "../../hooks/useIsWishlisted";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { addProduct, removeProduct } from "../../redux/slices/wishlistSlice";
