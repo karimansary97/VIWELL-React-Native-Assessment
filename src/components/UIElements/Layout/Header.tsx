@@ -16,7 +16,7 @@ const Header: FC<HeaderProps> = () => {
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={goBack}>
+      <Pressable onPress={goBack} testID="back-button">
         <AngleLeftIcon
           width={24 * unit}
           height={24 * unit}

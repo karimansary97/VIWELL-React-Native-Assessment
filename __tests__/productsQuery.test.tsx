@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { renderHook, waitFor } from "@testing-library/react-native";
-import { useGetProductsQuery } from "./products"; // Your hook
-import { store } from "../store";
+import { useGetProductsQuery } from "../src/redux/queries/products"; // Your hook
+import { store } from "../src/redux/store";
 import { Provider } from "react-redux";
 import fetchMock from "jest-fetch-mock";
 

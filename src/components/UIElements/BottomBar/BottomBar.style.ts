@@ -7,12 +7,11 @@ export default StyleSheet.create({
     flexDirection: "row",
     backgroundColor: colors.white,
     paddingHorizontal: 12 * unit,
-    paddingTop: 16 * unit,
+    paddingTop: 18 * unit,
     paddingBottom: 32 * unit,
-    borderRadius: 8 * unit,
   },
   item: {
-    flexBasis: "50%",
+    flex: 1,
     alignItems: "center",
   },
   text: {

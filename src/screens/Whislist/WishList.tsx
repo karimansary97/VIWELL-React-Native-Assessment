@@ -19,7 +19,9 @@ const WishList: FC<WishListProps> = ({}) => {
         <FlatList
           data={wishlist}
           showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => <ProductItem item={item} />}
+          renderItem={({ item, index }) => (
+            <ProductItem item={item} index={index} />
+          )}
           style={styles.container}
         />
       )}
