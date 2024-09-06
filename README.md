@@ -68,9 +68,15 @@ yarn install
 npm install -g expo-cli
 ```
 ## Addtitonal step 
+for ios .
 
 ```bash
 npx pod-install
+```
+create .env file and add this line :
+
+```bash
+EXPO_PUBLIC_API_URL=https://dummyjson.com
 ```
 
 ## Run Project 
@@ -91,12 +97,6 @@ We use unit-test and e2e test.
  yarn e2e:test-android // for android 
 ```
 
-2. TO RUN unit test.
-
- ```bash
-yarn unit-test
-```
-
 ### E2e Demo For ios 
   
 https://github.com/user-attachments/assets/256ee0ed-83b9-4d1f-b8a0-3ee8dbfc7bd1
@@ -112,3 +112,16 @@ https://github.com/user-attachments/assets/02ea5974-32f6-43c2-93d4-f0e0b007fc42
 Result appear in image.
 
 ![Screenshot 2024-09-06 at 7 58 28 AM](https://github.com/user-attachments/assets/623523f5-4109-4f74-a9af-a16de1909636)
+
+### unit test for queries and critical function 
+
+1. TO RUN unit test.
+
+ ```bash
+yarn unit-test
+```
+Result appear in image. 
+![Screenshot 2024-09-06 at 4 34 28 PM](https://github.com/user-attachments/assets/470dcc3e-6b25-4def-b69a-04c85b0db891)
+
+
+
