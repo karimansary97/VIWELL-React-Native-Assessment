@@ -38,7 +38,11 @@ const ProuctItem: FC<ProuctItemProps> = ({ item, index }) => {
     navigate(routes.productDetails, item?.id);
   };
   return (
-    <Pressable style={styles.continer} onPress={handleOnPress}>
+    <Pressable
+      style={styles.continer}
+      onPress={handleOnPress}
+      testID={`product-${index}`}
+    >
       <Image
         style={styles.itemImage}
         source={{ uri: item?.thumbnail }}
@@ -54,7 +58,7 @@ const ProuctItem: FC<ProuctItemProps> = ({ item, index }) => {
           <Text bold size="normal">
             {item?.price} {CURRENCY}
           </Text>
-          <Pressable
+          <TouchableOpacity
             style={styles.button}
             onPress={handleWishlistPress}
             testID={`Fav-button-${index}`}
@@ -65,7 +69,7 @@ const ProuctItem: FC<ProuctItemProps> = ({ item, index }) => {
               color={colors.white}
               fill={isWishlisted ? colors.white : undefined}
             />
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
     </Pressable>

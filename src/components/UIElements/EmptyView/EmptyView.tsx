@@ -10,7 +10,7 @@ const EmptyView: FC<EmptyViewProps> = ({
   message = "No Data Found,Try Agian later...",
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="Empty-View">
       <Text bold size="large">
         {message}
       </Text>

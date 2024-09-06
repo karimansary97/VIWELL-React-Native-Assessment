@@ -33,24 +33,31 @@ const BottomBar: FC<BottomTabBarProps> = ({
         };
 
         return (
-          <Pressable key={route.key} style={styles.item} onPress={onPress}>
-            {options.tabBarIcon &&
-              options.tabBarIcon({
-                focused: isFocused,
-                color: isFocused ? colors.primary : colors.smoke,
-                size: 0,
-              })}
-            <Text
-              semiBold
-              size="medium"
-              style={[
-                styles.text,
-                isFocused ? styles.focused : styles.unFocused,
-              ]}
+          <View style={{ flex: 1, flexDirection: "row" }} key={label}>
+            <Pressable
+              key={route.key}
+              style={styles.item}
+              onPress={onPress}
+              testID={`${index}-tab`}
             >
-              {label}
-            </Text>
-          </Pressable>
+              {options.tabBarIcon &&
+                options.tabBarIcon({
+                  focused: isFocused,
+                  color: isFocused ? colors.primary : colors.smoke,
+                  size: 0,
+                })}
+              <Text
+                semiBold
+                size="medium"
+                style={[
+                  styles.text,
+                  isFocused ? styles.focused : styles.unFocused,
+                ]}
+              >
+                {label}
+              </Text>
+            </Pressable>
+          </View>
         );
       })}
     </View>
