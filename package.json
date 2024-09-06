@@ -9,7 +9,8 @@
     "web": "expo start --web",
     "test": "jest --watchAll",
     "unit-test": "jest --testPathPattern=__tests__",
-    "e2e:ios": "detox test --configuration ios.sim.debug "
+    "e2e:test-ios": "detox build -c ios.sim.debug && detox test -c ios.sim.debug",
+    "e2e:test-android": "detox build -c android.emu.debug && detox test -c android.emu.debug"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "1.23.1",
